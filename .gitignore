@@ -1,0 +1,7 @@
+.DS_STORE
+/backend/.DS_STORE
+/backend/node_modules
+/backend/package-lock.json
+/contracts/.DS_STORE
+/contracts/target
+/contracts/Cargo.lock

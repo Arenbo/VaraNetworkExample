@@ -1,0 +1,12 @@
+[package]
+name = "amber-msgs"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+gstd.workspace = true
+amber-msgs-metaio.workspace = true
+
+[build-dependencies]
+gear-wasm-builder.workspace = true
+amber-msgs-metaio.workspace = true

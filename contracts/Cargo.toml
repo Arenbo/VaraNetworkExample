@@ -1,0 +1,19 @@
+[workspace]
+resolver = "2"
+members = ["amber-msgs"]
+
+[workspace.package]
+name = "ambervara"
+version = "0.1.0"
+edition = "2021"
+
+
+[workspace.dependencies]
+amber-msgs-metaio={path = 'amber-msgs/metaio'}
+
+gstd = "1.4.1"
+gmeta = "1.4.1"
+gtest  = "1.4.1"
+gear-wasm-builder = "1.4.1"
+parity-scale-codec = { version = "3.6.12", default-features = false }
+scale-info = { version = "2.11.3", default-features = false }
