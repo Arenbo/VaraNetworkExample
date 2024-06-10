@@ -4,8 +4,8 @@ const fs = require('fs');
 
 const PORT = 8085;
 const providerAddress = 'wss://testnet.vara.network';
-// const programId = '0xad500736df4d40ad11dd0d3256c1f0f3c07d45a5fc81495b71b5fdaffe41f8f6';
-const programId = '0x4a9293dcc70478496d553aa018bf2ab4fbc94d8986b9f7a62fab595782e1aea5';
+// const programId = '0x15794e61479894d9ff97d4cc48314bc18110269003f119b01e75b37e1f81cdb2';
+const programId = '0xc4d41741c6c5a6a0ad28425f8cc7c15a7e356c169d5488ce7221ba6ee9275189';
 const AccountMnemonic = 'account family aisle flavor ketchup inch pelican mountain tube advance peanut panel';
 const metaFile = 'amber_msgs.meta.txt';
 const metadata = fs.readFileSync(metaFile);
@@ -81,7 +81,7 @@ app.get('/api/data', async (req, res) => {
         let stateData = programState.toHuman();
         console.log('programState', stateData);
 
-        let message = stateData[stateData.length-1];
+        let message = stateData;
 
         res.json({ status: "ok", message: message });
       } catch (error) {

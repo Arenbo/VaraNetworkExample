@@ -2,6 +2,9 @@
 /backend/.DS_STORE
 /backend/node_modules
 /backend/package-lock.json
-/contracts/.DS_STORE
-/contracts/target
-/contracts/Cargo.lock
+/contract-string/.DS_STORE
+/contract-string/target
+/contract-string/Cargo.lock
+/contract-vec/.DS_STORE
+/contract-vec/target
+/contract-vec/Cargo.lock

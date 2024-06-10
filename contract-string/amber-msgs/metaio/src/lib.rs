@@ -1,11 +1,9 @@
 #![no_std]
 use gmeta::{InOut, Metadata, Out};
-use gstd::{prelude::*, Vec};
+use gstd::prelude::*;
 
 // Represents the metadata structure for handling incoming commands.
 pub struct CommandMetadata;
-
-pub static mut MESSAGES: Vec<String> = Vec::new();
 
 pub static mut MESSAGE: String = String::new();
 
@@ -22,8 +20,8 @@ impl Metadata for CommandMetadata {
     type Init = Out<String>;
     // taking an input as a command
     type Handle = InOut<Command, String>;    
-    // outputs a vector of `Message` without expecting any input.
-    type State = Out<Vec<String>>;
+    // outputs a message stored in state without expecting any input.
+    type State = Out<String>;
     
     type Reply = ();
     type Others = ();
