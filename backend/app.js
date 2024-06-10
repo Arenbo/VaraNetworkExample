@@ -4,9 +4,11 @@ const fs = require('fs');
 
 const PORT = 8085;
 const providerAddress = 'wss://testnet.vara.network';
-const programId = '0x08300feba7072f43c2f0140ef2f25b9b5a1d0cbe66534861d958ca8c86e21a21';
+// const programId = '0xad500736df4d40ad11dd0d3256c1f0f3c07d45a5fc81495b71b5fdaffe41f8f6';
+const programId = '0xffbbfa32865aae084528109d2838620ef07f5fc422936d5b885f683b7b7e3e1a';
 const AccountMnemonic = 'account family aisle flavor ketchup inch pelican mountain tube advance peanut panel';
 const metaFile = 'amber_msgs.meta.txt';
+const metadata = fs.readFileSync(metaFile);
 
 const app = express();
 app.use(express.json());
@@ -24,13 +26,12 @@ app.post('/api/data', async (req, res) => {
   const keyring = await GearKeyring.fromMnemonic(AccountMnemonic, 'Amber');
 
   try {
-    const metadata = fs.readFileSync('amber_msgs.meta.txt');
     const meta = ProgramMetadata.from(`0x${metadata}`);
 
     const gas = await gearApi.program.calculateGas.handle(
       programId,
       programId,
-      { cmd: 0, content: data.content },
+      { content: data.content },
       0,
       false,
       meta,
@@ -42,7 +43,7 @@ app.post('/api/data', async (req, res) => {
     
     const message = {
       destination: programId,
-      payload: { cmd: 0, content: data.content },
+      payload: { content: data.content },
       gasLimit: gasLimitX2,
       value:  1000000000000,
     };
@@ -70,7 +71,6 @@ app.post('/api/data', async (req, res) => {
 // return message from contract
 app.get('/api/data', async (req, res) => {
   try {
-      const metadata = fs.readFileSync(metaFile);
       const meta = ProgramMetadata.from(`0x${metadata}`);
 
       try {
@@ -81,7 +81,9 @@ app.get('/api/data', async (req, res) => {
         let stateData = programState.toHuman();
         console.log('programState', stateData);
 
-        res.json({ status: "ok", message: stateData });
+        let message = stateData[stateData.length-1];
+
+        res.json({ status: "ok", message: message });
       } catch (error) {
         console.error('Error reading program state:', error);
         res.status(500).json({ error: 'Error reading program state' });
